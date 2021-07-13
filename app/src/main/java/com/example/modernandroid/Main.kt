@@ -73,7 +73,9 @@ fun main() {
     print(person.name)
 
     val person2 = Person2("김규성", 27)
-    print(person)
+    println("여기!")
+    println(person2.name)
+    println(person2.age)
 
 }
 
