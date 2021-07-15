@@ -3,7 +3,6 @@ package com.example.modernandroid;
 import android.arch.persistence.room.Room;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
-import android.view.View;
 import android.widget.EditText;
 import android.widget.TextView;
 
@@ -25,14 +24,15 @@ public class RoomActivity extends AppCompatActivity {
                 // allowMainThreadQueries() 메소드를 통해 메인스레드에서 db를 조작하도록 설정함.
                 .build();
 
-        mResultTextView.setText(db.todoDao().getAll().toString());
+        // UI 갱신
+        db.todoDao().getAll().observe(this, todos -> {
+            mResultTextView.setText(todos.toString());
+        });
 
-        findViewById(R.id.add_button).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                db.todoDao().insert(new Todo(mTodoEditText.getText().toString()));
-                mResultTextView.setText(db.todoDao().getAll().toString());
-            }
+
+        // 버튼 클릭시 DB에 insert
+        findViewById(R.id.add_button).setOnClickListener(v -> {
+            db.todoDao().insert(new Todo(mTodoEditText.getText().toString()));
         });
 
     }
