@@ -1,5 +1,6 @@
 package com.example.modernandroid
 
+import android.arch.lifecycle.ViewModelProvider
 import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
@@ -18,13 +19,13 @@ import android.view.View
 //        TODO("Not yet implemented")
 //    }
 //}
-class MainActivity : AppCompatActivity(), View.OnClickListener {
+class MainActivity : AppCompatActivity(){
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
     }
 
-    override fun onClick(v: View?) {
-        TODO("Not yet implemented")
-    }
+
 }
