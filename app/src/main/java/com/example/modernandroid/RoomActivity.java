@@ -1,10 +1,12 @@
 package com.example.modernandroid;
 
-import android.arch.persistence.room.Room;
+
 import android.os.Bundle;
-import android.support.v7.app.AppCompatActivity;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.room.Room;
 
 public class RoomActivity extends AppCompatActivity {
     private EditText mTodoEditText;
@@ -24,16 +26,16 @@ public class RoomActivity extends AppCompatActivity {
                 // allowMainThreadQueries() 메소드를 통해 메인스레드에서 db를 조작하도록 설정함.
                 .build();
 
-        // UI 갱신
-        db.todoDao().getAll().observe(this, todos -> {
-            mResultTextView.setText(todos.toString());
-        });
-
-
-        // 버튼 클릭시 DB에 insert
-        findViewById(R.id.add_button).setOnClickListener(v -> {
-            db.todoDao().insert(new Todo(mTodoEditText.getText().toString()));
-        });
+//        // UI 갱신
+//        db.todoDao().getAll().observe(this, todos -> {
+//            mResultTextView.setText(todos.toString());
+//        });
+//
+//
+//        // 버튼 클릭시 DB에 insert
+//        findViewById(R.id.add_button).setOnClickListener(v -> {
+//            db.todoDao().insert(new Todo(mTodoEditText.getText().toString()));
+//        });
 
     }
 }

@@ -1,9 +1,10 @@
 package com.example.modernandroid
 
-import android.arch.lifecycle.ViewModelProvider
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.view.View
+import androidx.appcompat.app.AppCompatActivity
+import androidx.room.Room
+import kotlinx.android.synthetic.main.activity_main.*
+
 
 //상속은 생성자 표시'()' 를 무조건 붙이고 인터페이스는 뒤에 '()'를 붙이지 않는다.
 // null이 가능한 데이터 타입(String,Bundle,Int 등등) 뒤에는 ?가 붙고,
@@ -25,6 +26,19 @@ class MainActivity : AppCompatActivity(){
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
+        val db = Room.databaseBuilder(
+            applicationContext,
+            AppDatabase::class.java, "database-name"
+        ).allowMainThreadQueries()
+         .build()
+
+        result_text.text = db.todoDaoKotlin().getAll().toString()
+
+        add_button.setOnClickListener{
+            db.todoDaoKotlin().insert(TodoKotlin(todo_edit.text.toString()))
+
+            result_text.text = db.todoDaoKotlin().getAll().toString()
+        }
     }
 
 
